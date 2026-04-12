@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ποια Θάλασσα Είσαι;</title>
+<script data-cfasync="false" data-no-defer="1">
+  (function () {
+      var script = document.createElement("script");
+      script.async = 1;
+      script.src = 'https://tp-em.com/NTE3OTA0.js?t=517904';
+      document.head.appendChild(script);
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dusk: #1a0a2e;
+    --sunset1: #c84b31;
+    --sunset2: #e8834a;
+    --honey: #f0b429;
+    --peach: #fde8d0;
+    --coral: #ff6b6b;
+    --lavender: #8b5cf6;
+    --cream: #fdf6ee;
+    --white: #ffffff;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+    background: var(--dusk);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* SUNSET SKY BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      #0d0520 0%,
+      #1a0a2e 20%,
+      #3d1c5e 40%,
+      #8b3a6b 55%,
+      #c84b31 70%,
+      #e8834a 82%,
+      #f0b429 92%,
+      #fde8d0 100%
+    );
+    z-index: 0;
+  }
+
+  /* STARS */
+  .stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 50%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 0.2; transform: scale(1); }
+    50%      { opacity: 1;   transform: scale(1.3); }
+  }
+
+  /* HORIZON WAVES */
+  .horizon {
+    position: fixed;
+    bottom: 0; left: 0;
+    width: 100%; height: 180px;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .wave-layer {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 200%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 80'%3E%3Cpath fill='%231a3a5c' fill-opacity='0.7' d='M0,40 C100,70 200,10 400,40 C600,70 700,10 800,40 L800,80 L0,80 Z'/%3E%3C/svg%3E") repeat-x bottom;
+    background-size: 800px 80px;
+    animation: waveMove 8s linear infinite;
+  }
+  .wave-layer:nth-child(2) {
+    background-color: rgba(10,25,50,0.5);
+    animation-duration: 12s;
+    animation-direction: reverse;
+    opacity: 0.6;
+    bottom: 10px;
+  }
+  @keyframes waveMove {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-800px); }
+  }
+
+  /* CARD */
+  .card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 520px;
+    background: rgba(253, 246, 238, 0.96);
+    border-radius: 32px;
+    padding: 44px 38px;
+    box-shadow:
+      0 0 0 1px rgba(240,180,41,0.3),
+      0 30px 60px rgba(0,0,0,0.5),
+      0 0 80px rgba(200,75,49,0.15);
+    color: var(--dusk);
+  }
+
+  /* PROGRESS DOTS */
+  .dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #ddd;
+    transition: all 0.4s;
+  }
+  .dot.active {
+    background: var(--sunset1);
+    width: 24px;
+    border-radius: 4px;
+  }
+  .dot.done { background: var(--honey); }
+
+  .step-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sunset1);
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .question {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1.4rem, 4vw, 1.85rem);
+    font-weight: 700;
+    color: var(--dusk);
+    line-height: 1.3;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .question-sub {
+    font-size: 0.88rem;
+    color: #a08060;
+    text-align: center;
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+
+  /* OPTION GRID — 2x2 */
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .opt {
+    background: var(--cream);
+    border: 2px solid #e8d8c4;
+    border-radius: 18px;
+    padding: 20px 14px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .opt:hover {
+    border-color: var(--sunset2);
+    background: #fff8f2;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(200,75,49,0.12);
+  }
+  .opt.selected {
+    border-color: var(--sunset1);
+    background: linear-gradient(135deg, #fff3eb, #ffe8d4);
+    box-shadow: 0 6px 18px rgba(200,75,49,0.2);
+  }
+  .opt-emoji { font-size: 2rem; }
+  .opt-text  {
+    font-size: 0.83rem;
+    font-weight: 600;
+    color: #5a3a2a;
+    line-height: 1.35;
+  }
+
+  /* RESULT */
+  .result { display:none; }
+
+  .result-sky {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .result-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 10px;
+    animation: sway 4s ease-in-out infinite;
+  }
+  @keyframes sway {
+    0%,100% { transform: rotate(-4deg); }
+    50%      { transform: rotate(4deg); }
+  }
+
+  .result-type {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--sunset1), var(--honey));
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  .result-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    font-weight: 700;
+    color: var(--dusk);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .result-tagline {
+    font-size: 0.9rem;
+    color: #a08060;
+    font-style: italic;
+    margin-bottom: 22px;
+  }
+
+  .personality-box {
+    background: linear-gradient(135deg, #fff8f0, #ffeedd);
+    border: 1px solid #f0d0a0;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+
+  .personality-box h4 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sunset1);
+    margin-bottom: 10px;
+  }
+
+  .personality-box p {
+    font-size: 0.9rem;
+    color: #5a3a2a;
+    line-height: 1.7;
+  }
+
+  .traits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 14px 0;
+  }
+  .trait {
+    background: white;
+    border: 1px solid #e8c8a0;
+    color: #8a5530;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+
+  .cruise-rec {
+    background: var(--dusk);
+    color: var(--cream);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 14px;
+  }
+  .cruise-rec-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--honey);
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .cruise-rec h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+    color: white;
+  }
+  .cruise-rec p {
+    font-size: 0.83rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6;
+  }
+  .cruise-price {
+    display: inline-block;
+    margin-top: 10px;
+    background: rgba(240,180,41,0.2);
+    color: var(--honey);
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 10px;
+  }
+
+  .cta-main {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, var(--sunset1), var(--sunset2));
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 17px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 10px;
+    letter-spacing: 0.3px;
+  }
+  .cta-main:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(200,75,49,0.35);
+  }
+
+  .cta-share {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: 2px solid #e8d0b8;
+    color: #8a6040;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    padding: 13px;
+    border-radius: 14px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    margin-bottom: 14px;
+  }
+  .cta-share:hover {
+    border-color: var(--sunset2);
+    color: var(--sunset1);
+  }
+
+  .restart-btn {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #b09080;
+    font-size: 0.82rem;
+    cursor: pointer;
+    text-align: center;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  .restart-btn:hover { color: var(--sunset1); }
+
+  .aff-note {
+    text-align: center;
+    font-size: 0.72rem;
+    color: #c0a090;
+    line-height: 1.5;
+  }
+
+  /* INTRO */
+  .intro { text-align: center; }
+  .intro-sunset { font-size: 3.5rem; margin-bottom: 16px; }
+  .intro h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1.6rem, 5vw, 2.3rem);
+    font-weight: 700;
+    color: var(--dusk);
+    margin-bottom: 12px;
+    line-height: 1.25;
+  }
+  .intro p {
+    font-size: 0.92rem;
+    color: #7a5040;
+    line-height: 1.7;
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+  .start-btn {
+    background: linear-gradient(135deg, var(--sunset1), var(--honey));
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 16px 40px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 24px rgba(200,75,49,0.3);
+  }
+  .start-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(200,75,49,0.4);
+  }
+
+  .fade-in  { animation: fi 0.45s ease both; }
+  @keyframes fi { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+
+  @media (max-width: 400px) {
+    .card { padding: 30px 20px; }
+    .options-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- stars -->
+<div class="stars" id="starsEl"></div>
+<div class="horizon">
+  <div class="wave-layer"></div>
+  <div class="wave-layer"></div>
+</div>
+
+<div class="card">
+
+  <!-- INTRO -->
+  <div id="intro" class="intro fade-in">
+    <div class="intro-sunset">🌅</div>
+    <h1>Ποια Θάλασσα Είσαι;</h1>
+    <p>Απάντησε σε 5 ερωτήσεις για την προσωπικότητά σου — και ανακάλυψε ποια κρουαζιέρα γράφτηκε για σένα.</p>
+    <button class="start-btn" onclick="startQuiz()">Ανακάλυψέ το ✨</button>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz" style="display:none;">
+    <div class="dots" id="dots"></div>
+    <div class="step-label" id="stepLbl"></div>
+    <div class="question" id="qText"></div>
+    <div class="question-sub" id="qSub"></div>
+    <div class="options-grid" id="opts"></div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result" class="result">
+    <div class="result-sky">
+      <span class="result-icon" id="rIcon">🌊</span>
+      <div class="result-type">Η θάλασσά σου</div>
+      <div class="result-title" id="rTitle"></div>
+      <div class="result-tagline" id="rTagline"></div>
+    </div>
+    <div class="personality-box">
+      <h4>Η προσωπικότητά σου</h4>
+      <p id="rPersonality"></p>
+      <div class="traits" id="rTraits"></div>
+    </div>
+    <div class="cruise-rec">
+      <div class="cruise-rec-label">Η κρουαζιέρα που σου ταιριάζει</div>
+      <h3 id="rCruise"></h3>
+      <p id="rCruiseDesc"></p>
+      <span class="cruise-price" id="rPrice"></span>
+    </div>
+    <a href="#" class="cta-main" id="rCta" onclick="return false;"></a>
+    <button class="cta-share" onclick="shareResult()">📤 Μοιράσου το αποτέλεσμά σου</button>
+    <button class="restart-btn" onclick="restart()">↩ Ξανάπαιξε</button>
+    <div class="aff-note">* Affiliate link — κερδίζω μια μικρή προμήθεια αν κάνεις κράτηση, χωρίς επιπλέον κόστος για σένα.</div>
+  </div>
+
+</div>
+
+<script>
+// Generate stars
+const starsEl = document.getElementById('starsEl');
+for (let i = 0; i < 60; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 2.5 + 0.5;
+  s.style.cssText = `
+    width:${size}px; height:${size}px;
+    top:${Math.random()*100}%;
+    left:${Math.random()*100}%;
+    animation-duration:${2+Math.random()*4}s;
+    animation-delay:${Math.random()*4}s;
+  `;
+  starsEl.appendChild(s);
+}
+
+const questions = [
+  {
+    text: 'Είναι Παρασκευή βράδυ. Τι κάνεις;',
+    sub: 'Η πρώτη ένστικτη απάντηση μετράει περισσότερο.',
+    options: [
+      { e:'🎉', t:'Βγαίνω — θέλω κόσμο, μουσική, ζωή', v:'social' },
+      { e:'📚', t:'Μένω σπίτι με βιβλίο ή ταινία', v:'calm' },
+      { e:'✈️', t:'Ψάχνω πού να πάω το Σαββατοκύριακο', v:'adventurous' },
+      { e:'🍷', t:'Μαζεύω φίλους για δείπνο σπίτι', v:'cozy' },
+    ]
+  },
+  {
+    text: 'Ποια εικόνα σε ταράζει περισσότερο;',
+    sub: 'Αυτή που νιώθεις ότι "είναι για σένα".',
+    options: [
+      { e:'🏛️', t:'Μια αρχαία πόλη στο ηλιοβασίλεμα', v:'cultural' },
+      { e:'🌊', t:'Ανοιχτή θάλασσα, ορίζοντας, ελευθερία', v:'free' },
+      { e:'🍽️', t:'Τραπέζι με εκπληκτικό φαγητό σε ταράτσα', v:'gastro' },
+      { e:'🎭', t:'Νυχτερινή βόλτα σε πολυσύχναστο λιμάνι', v:'lively' },
+    ]
+  },
+  {
+    text: 'Τι σε κουράζει περισσότερο στα ταξίδια;',
+    sub: 'Το αντίθετο του ιδανικού.',
+    options: [
+      { e:'😤', t:'Ουρές, αναμονές, χαμένος χρόνος', v:'efficient' },
+      { e:'😶', t:'Πολύς κόσμος παντού, θόρυβος', v:'quiet' },
+      { e:'😴', t:'Βαρετά προγράμματα, τίποτα νέο', v:'adventure' },
+      { e:'🥺', t:'Να είμαι μακριά από αγαπημένους ανθρώπους', v:'together' },
+    ]
+  },
+  {
+    text: 'Διάλεξε μια λέξη που σε εκφράζει:',
+    sub: 'Μην το σκεφτείς πολύ.',
+    options: [
+      { e:'🔥', t:'Πάθος', v:'passionate' },
+      { e:'🌿', t:'Ηρεμία', v:'peaceful' },
+      { e:'⚡', t:'Ενέργεια', v:'energetic' },
+      { e:'🌙', t:'Μυστήριο', v:'mysterious' },
+    ]
+  },
+  {
+    text: 'Στο πλοίο, τι κάνεις πρώτα;',
+    sub: 'Η διαίσθηση λέει πολλά.',
+    options: [
+      { e:'🌅', t:'Βρίσκω τη θέση μου στο κατάστρωμα', v:'relaxer' },
+      { e:'🗺️', t:'Κοιτάω τον χάρτη — τι λιμάνια έχουμε;', v:'explorer' },
+      { e:'🍹', t:'Βρίσκω το μπαρ και τους υπόλοιπους', v:'socializer' },
+      { e:'🛏️', t:'Πηγαίνω στην καμπίνα να χαλαρώσω', v:'cozybird' },
+    ]
+  }
+];
+
+const profiles = {
+  // Scores mapped to personality types
+  types: [
+    {
+      id: 'explorer',
+      icon: '🧭',
+      title: 'Η Ψυχή του Εξερευνητή',
+      tagline: '"Η θάλασσα ήταν πάντα εκεί — εσύ απλά αργούσες να έρθεις."',
+      personality: 'Ζεις για τις νέες ανακαλύψεις. Κάθε λιμάνι είναι ένα νέο κεφάλαιο. Δεν κάθεσαι ήσυχος όσο υπάρχει κάτι να δεις.',
+      traits: ['Περίεργος/η', 'Αυθόρμητος/η', 'Αγαπάει την ιστορία', 'Adventure seeker'],
+      cruise: 'Costa Smeralda — Μεσόγειος Grand Tour',
+      cruiseDesc: '12 λιμάνια, 3 χώρες, αμέτρητα αξιοθέατα. Κάθε μέρα σε νέο προορισμό — ιδανικό για εσένα που δεν αντέχεις να μένεις στη θέση σου.',
+      price: 'Από €680/άτομο',
+      cta: '🗺️ Δες τα δρομολόγια του Costa Grand Tour →',
+      link: '#costa-grandtour-affiliate'
+    },
+    {
+      id: 'luxuryseeker',
+      icon: '✨',
+      title: 'Ο/Η Λάτρης της Πολυτέλειας',
+      tagline: '"Αξίζεις το καλύτερο — και το ξέρεις."',
+      personality: 'Δεν ταξιδεύεις απλώς — βιώνεις. Το φαγητό, η αισθητική, η ατμόσφαιρα μετράνε εξίσου με τον προορισμό. Ψάχνεις εμπειρίες που θυμάσαι για χρόνια.',
+      traits: ['Λάτρης γαστρονομίας', 'Αισθητική σκέψη', 'Απαιτητικός/η', 'Καλόγουστος/η'],
+      cruise: 'Celebrity Apex — Αιγαίο & Τουρκικά Παράλια',
+      cruiseDesc: 'Fine dining, award-winning spa, ελληνικά νησιά και κρυμμένες τουρκικές ακτές. Ένα πλοίο σχεδιασμένο για ανθρώπους με γούστο.',
+      price: 'Από €1.290/άτομο',
+      cta: '✨ Δες τις διαθέσιμες ημερομηνίες →',
+      link: '#celebrity-apex-affiliate'
+    },
+    {
+      id: 'socialbutterfly',
+      icon: '🎉',
+      title: 'Η Ψυχή της Παρέας',
+      tagline: '"Ο καλύτερος προορισμός είναι οι σωστοί άνθρωποι."',
+      personality: 'Για σένα, το ταξίδι είναι η παρέα. Θέλεις ζωντανή ατμόσφαιρα, νέους ανθρώπους, βραδινά που δεν τελειώνουν νωρίς.',
+      traits: ['Κοινωνικός/ή', 'Ζωντανός/ή', 'Εξωστρεφής', 'Fun lover'],
+      cruise: 'MSC Grandiosa — Δυτική Μεσόγειος',
+      cruiseDesc: 'Το μεγαλύτερο πλοίο της MSC, με nightclubs, live shows, 5 πισίνες και εκατοντάδες δραστηριότητες. Κάθε βράδυ είναι event.',
+      price: 'Από €490/άτομο',
+      cta: '🎉 Δες προσφορές MSC Grandiosa →',
+      link: '#msc-grandiosa-affiliate'
+    },
+    {
+      id: 'soulseeker',
+      icon: '🌿',
+      title: 'Η Ήρεμη Ψυχή',
+      tagline: '"Η θάλασσα σε ξέρει από πριν τη γνωρίσεις."',
+      personality: 'Δεν ψάχνεις θόρυβο — ψάχνεις νόημα. Τα ηλιοβασιλέματα, η ησυχία του ανοιχτού πελάγους, ένα καλό βιβλίο στο κατάστρωμα.',
+      traits: ['Ενδοστρεφής', 'Φιλόσοφος/η', 'Αγαπάει τη φύση', 'Mindful traveler'],
+      cruise: 'Ponant Le Bellot — Ελληνικά Νησιά',
+      cruiseDesc: 'Μικρό luxury ship (184 επιβάτες), ήσυχα νησιά που τα μεγάλα πλοία δεν φτάνουν. Ιδανικό αν θέλεις αυθεντική εμπειρία χωρίς μάζες.',
+      price: 'Από €2.100/άτομο',
+      cta: '🌿 Ανακάλυψε το Ponant →',
+      link: '#ponant-affiliate'
+    }
+  ]
+};
+
+// Simple scoring
+const typeScores = { explorer:0, luxuryseeker:0, socialbutterfly:0, soulseeker:0 };
+
+const answerMap = {
+  social: 'socialbutterfly', calm: 'soulseeker', adventurous: 'explorer', cozy: 'luxuryseeker',
+  cultural: 'explorer', free: 'soulseeker', gastro: 'luxuryseeker', lively: 'socialbutterfly',
+  efficient: 'explorer', quiet: 'soulseeker', adventure: 'explorer', together: 'socialbutterfly',
+  passionate: 'socialbutterfly', peaceful: 'soulseeker', energetic: 'explorer', mysterious: 'luxuryseeker',
+  relaxer: 'soulseeker', explorer: 'explorer', socializer: 'socialbutterfly', cozybird: 'luxuryseeker'
+};
+
+let current = 0;
+const scores = { explorer:0, luxuryseeker:0, socialbutterfly:0, soulseeker:0 };
+
+function buildDots() {
+  const d = document.getElementById('dots');
+  d.innerHTML = '';
+  questions.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === current ? ' active' : i < current ? ' done' : '');
+    d.appendChild(dot);
+  });
+}
+
+function showQuestion(idx) {
+  const q = questions[idx];
+  document.getElementById('stepLbl').textContent = `Ερώτηση ${idx+1} από ${questions.length}`;
+  document.getElementById('qText').textContent = q.text;
+  document.getElementById('qSub').textContent = q.sub;
+  buildDots();
+
+  const container = document.getElementById('opts');
+  container.innerHTML = '';
+  q.options.forEach(opt => {
+    const btn = document.createElement('div');
+    btn.className = 'opt';
+    btn.innerHTML = `<span class="opt-emoji">${opt.e}</span><span class="opt-text">${opt.t}</span>`;
+    btn.onclick = () => pick(opt.v, btn);
+    container.appendChild(btn);
+  });
+}
+
+function pick(value, btn) {
+  document.querySelectorAll('.opt').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const type = answerMap[value] || 'explorer';
+  scores[type]++;
+
+  setTimeout(() => {
+    current++;
+    if (current < questions.length) {
+      showQuestion(current);
+    } else {
+      showResult();
+    }
+  }, 400);
+}
+
+function showResult() {
+  document.getElementById('quiz').style.display = 'none';
+  const resultEl = document.getElementById('result');
+  resultEl.style.display = 'block';
+  resultEl.classList.add('fade-in');
+
+  // find winner
+  const winner = Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
+  const profile = profiles.types.find(p => p.id === winner) || profiles.types[0];
+
+  document.getElementById('rIcon').textContent = profile.icon;
+  document.getElementById('rTitle').textContent = profile.title;
+  document.getElementById('rTagline').textContent = profile.tagline;
+  document.getElementById('rPersonality').textContent = profile.personality;
+  document.getElementById('rTraits').innerHTML = profile.traits.map(t => `<span class="trait">${t}</span>`).join('');
+  document.getElementById('rCruise').textContent = profile.cruise;
+  document.getElementById('rCruiseDesc').textContent = profile.cruiseDesc;
+  document.getElementById('rPrice').textContent = profile.price;
+  document.getElementById('rCta').textContent = profile.cta;
+  document.getElementById('rCta').href = profile.link;
+}
+
+function shareResult() {
+  if (navigator.share) {
+    navigator.share({ title: 'Ανακάλυψα ποια θάλασσα είμαι!', url: window.location.href });
+  } else {
+    navigator.clipboard.writeText(window.location.href).then(() => alert('Ο σύνδεσμος αντιγράφηκε!'));
+  }
+}
+
+function startQuiz() {
+  document.getElementById('intro').style.display = 'none';
+  const quiz = document.getElementById('quiz');
+  quiz.style.display = 'block';
+  quiz.classList.add('fade-in');
+  showQuestion(0);
+}
+
+function restart() {
+  Object.keys(scores).forEach(k => scores[k] = 0);
+  current = 0;
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  showQuestion(0);
+}
+</script>
+</body>
+</html>
