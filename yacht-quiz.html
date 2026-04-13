@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Βρες το Ιδανικό Γιοτ σου — PassMatch</title>
+<script data-cfasync="false" data-no-defer="1">
+  (function () {
+      var script = document.createElement("script");
+      script.async = 1;
+      script.src = 'https://tp-em.com/NTE3OTA0.js?t=517904';
+      document.head.appendChild(script);
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sea: #0a7ea4;
+    --teal: #0fb8d4;
+    --aqua: #7ee8fa;
+    --white: #ffffff;
+    --cream: #f8fcfe;
+    --sand: #f0ebe0;
+    --dark: #0d2233;
+    --muted: rgba(10,32,51,0.5);
+    --gold: #c9a84c;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* SEA BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 45vh;
+    background: linear-gradient(180deg, #0d2233 0%, #0a7ea4 50%, #0fb8d4 80%, #7ee8fa 100%);
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 55vh;
+    background: var(--cream);
+    z-index: 0;
+  }
+
+  /* WAVES */
+  .wave-divider {
+    position: fixed;
+    top: 42vh;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* CARD */
+  .card {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 560px;
+    background: white;
+    border-radius: 32px;
+    box-shadow: 0 30px 80px rgba(10,32,51,0.15), 0 0 0 1px rgba(10,126,164,0.08);
+    overflow: hidden;
+  }
+
+  /* CARD TOP */
+  .card-top {
+    background: linear-gradient(135deg, #0d2233, #0a7ea4);
+    padding: 32px 36px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-top::before {
+    content: '⛵';
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 4rem;
+    opacity: 0.15;
+  }
+
+  .card-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: var(--aqua);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(126,232,250,0.3);
+  }
+
+  .card-title {
+    font-family: 'Italiana', serif;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .card-sub {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+  }
+
+  /* PROGRESS */
+  .progress-wrap {
+    padding: 0 36px;
+    background: var(--dark);
+    padding-bottom: 16px;
+  }
+
+  .progress-track {
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--aqua));
+    border-radius: 2px;
+    transition: width 0.5s ease;
+  }
+
+  .progress-text {
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    margin-top: 16px;
+  }
+
+  /* BODY */
+  .card-body {
+    padding: 32px 36px 36px;
+  }
+
+  .question {
+    font-family: 'Italiana', serif;
+    font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+    color: var(--dark);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .question-hint {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+
+  /* OPTIONS */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .options.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .opt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--cream);
+    border: 1.5px solid rgba(10,126,164,0.12);
+    border-radius: 14px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    text-align: left;
+    line-height: 1.35;
+  }
+
+  .options.grid-2 .opt {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 18px 12px;
+    gap: 8px;
+  }
+
+  .opt:hover {
+    border-color: var(--teal);
+    background: rgba(15,184,212,0.06);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(10,126,164,0.12);
+  }
+
+  .opt.selected {
+    border-color: var(--sea);
+    background: rgba(10,126,164,0.08);
+    box-shadow: 0 4px 16px rgba(10,126,164,0.15);
+  }
+
+  .opt-emoji { font-size: 1.5rem; flex-shrink: 0; }
+  .options.grid-2 .opt-emoji { font-size: 2rem; }
+
+  .opt-text { font-weight: 500; }
+  .opt-sub { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+
+  /* RESULT */
+  .result { display: none; }
+
+  .result-top {
+    background: linear-gradient(135deg, #0d2233, #0a7ea4);
+    padding: 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .result-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 12px;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,100% { transform: translateY(0) rotate(-3deg); }
+    50%      { transform: translateY(-10px) rotate(3deg); }
+  }
+
+  .result-badge {
+    display: inline-block;
+    background: rgba(126,232,250,0.2);
+    color: var(--aqua);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(126,232,250,0.3);
+    margin-bottom: 12px;
+  }
+
+  .result-title {
+    font-family: 'Italiana', serif;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    color: white;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .result-sub {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.6);
+    font-style: italic;
+  }
+
+  .result-body {
+    padding: 28px 36px 36px;
+  }
+
+  .result-desc {
+    font-size: 0.92rem;
+    color: #445;
+    line-height: 1.75;
+    margin-bottom: 20px;
+    padding: 16px;
+    background: var(--cream);
+    border-radius: 14px;
+    border-left: 3px solid var(--teal);
+  }
+
+  .result-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .detail-box {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 14px;
+    border: 1px solid rgba(10,126,164,0.1);
+  }
+
+  .detail-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sea);
+    margin-bottom: 4px;
+  }
+
+  .detail-value {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--dark);
+  }
+
+  .cta-btn {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, var(--sea), var(--teal));
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 18px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 10px;
+    letter-spacing: 0.3px;
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(10,126,164,0.35);
+  }
+
+  .share-btn {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: 1.5px solid rgba(10,126,164,0.2);
+    color: var(--sea);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.88rem;
+    padding: 14px;
+    border-radius: 14px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    margin-bottom: 10px;
+  }
+
+  .share-btn:hover {
+    border-color: var(--teal);
+    background: rgba(15,184,212,0.05);
+  }
+
+  .restart-btn {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-size: 0.82rem;
+    cursor: pointer;
+    text-align: center;
+    padding: 8px;
+    margin-bottom: 12px;
+  }
+
+  .aff-note {
+    text-align: center;
+    font-size: 0.72rem;
+    color: #aab;
+    line-height: 1.5;
+  }
+
+  /* INTRO */
+  .intro { }
+
+  .start-btn {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, var(--sea), var(--teal));
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 18px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 8px;
+  }
+
+  .start-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(10,126,164,0.35);
+  }
+
+  .intro-features {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .intro-feat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.88rem;
+    color: #556;
+  }
+
+  .feat-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(10,126,164,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .fade-in { animation: fi 0.4s ease both; }
+  @keyframes fi { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+  @media (max-width: 480px) {
+    .card-body { padding: 24px 20px 28px; }
+    .card-top { padding: 24px 20px 20px; }
+    .progress-wrap { padding: 0 20px 14px; }
+    .result-body { padding: 20px 20px 28px; }
+    .result-top { padding: 28px 20px; }
+    .result-details { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<svg class="wave-divider" viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#f8fcfe" d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,15 1440,20 L1440,40 L0,40 Z"/>
+</svg>
+
+<div class="card">
+
+  <!-- CARD TOP — always visible -->
+  <div class="card-top">
+    <div class="card-tag">🧭 PassMatch · Yacht Quiz</div>
+    <div class="card-title" id="cardTitle">Βρες το Ιδανικό<br>Γιοτ σου</div>
+    <div class="card-sub" id="cardSub">8 ερωτήσεις · 6 διαφορετικά αποτελέσματα · Δωρεάν</div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap" id="progressWrap" style="display:none;">
+    <div class="progress-text" id="progressText">Ερώτηση 1 από 8</div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="card-body">
+
+    <!-- INTRO -->
+    <div id="intro" class="fade-in">
+      <div class="intro-features">
+        <div class="intro-feat"><div class="feat-icon">🌍</div>Ελλάδα, Κροατία, Ισπανία, Καραϊβική και άλλα</div>
+        <div class="intro-feat"><div class="feat-icon">⛵</div>Μονόγαστα & Καταμαράν για κάθε γούστο</div>
+        <div class="intro-feat"><div class="feat-icon">💰</div>Για κάθε budget — από €2.500 έως €10.000+</div>
+        <div class="intro-feat"><div class="feat-icon">👥</div>Για ζευγάρια, παρέες και μεγάλες ομάδες</div>
+      </div>
+      <button class="start-btn" onclick="startQuiz()">Ξεκινάμε το Quiz →</button>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="quiz" style="display:none;">
+      <div class="question" id="qText"></div>
+      <div class="question-hint" id="qHint"></div>
+      <div class="options" id="opts"></div>
+    </div>
+
+    <!-- RESULT -->
+    <div id="result" class="result fade-in"></div>
+
+  </div>
+</div>
+
+<script>
+const AFFILIATE = 'https://tp.media/r?marker=718633&trs=517904&p=5907&u=https%3A%2F%2Fsearadar.com&campaign_id=258';
+
+const questions = [
+  {
+    text: 'Έχεις δίπλωμα ναυτιλίας;',
+    hint: 'Αυτό καθορίζει αν χρειάζεσαι σκίπερ ή όχι.',
+    multi: false,
+    options: [
+      { e:'⚓', t:'Ναι, έχω δίπλωμα', s:'Bareboat — οδηγώ μόνος/η μου', v:'licensed' },
+      { e:'👨‍✈️', t:'Όχι — θέλω σκίπερ', s:'Crewed yacht — χαλαρώνω εγώ', v:'skipper' },
+      { e:'🤷', t:'Δεν ξέρω ακόμα', s:'Ανοιχτός/ή σε προτάσεις', v:'any_crew' },
+    ]
+  },
+  {
+    text: 'Πού ονειρεύεσαι να ταξιδέψεις;',
+    hint: 'Διάλεξε τον προορισμό που σε τραβάει περισσότερο.',
+    multi: false,
+    options: [
+      { e:'🇬🇷', t:'Ελλάδα', s:'Αιγαίο & Ιόνιο', v:'greece' },
+      { e:'🇭🇷', t:'Κροατία', s:'Δαλματική Ακτή', v:'croatia' },
+      { e:'🇪🇸', t:'Ισπανία', s:'Βαλεαρίδες Νήσοι', v:'spain' },
+      { e:'🇮🇹', t:'Ιταλία', s:'Αμάλφι & Σικελία', v:'italy' },
+      { e:'🌴', t:'Καραϊβική', s:'Τροπικός Παράδεισος', v:'caribbean' },
+      { e:'🌏', t:'Ταϊλάνδη', s:'Εξωτικά Νερά', v:'thailand' },
+    ]
+  },
+  {
+    text: 'Ποια περιοχή της Ελλάδας;',
+    hint: 'Μόνο για Ελλάδα — αλλιώς πήγαινε στην επόμενη.',
+    multi: false,
+    onlyIf: 'greece',
+    options: [
+      { e:'🌊', t:'Κυκλάδες', s:'Σαντορίνη, Μύκονος, Πάρος', v:'cyclades' },
+      { e:'⛵', t:'Λευκάδα', s:'Ιόνιο & Γαλάζιες Σπηλιές', v:'lefkada' },
+      { e:'🏖️', t:'Κέρκυρα', s:'Πράσινο Νησί', v:'corfu' },
+      { e:'🌺', t:'Κως & Ρόδος', s:'Δωδεκάνησα', v:'kos_rhodes' },
+      { e:'🗺️', t:'Βόλος & Σκιάθος', s:'Σποράδες', v:'volos' },
+      { e:'✨', t:'Οπουδήποτε!', s:'Ανοιχτός/ή', v:'anywhere_gr' },
+    ]
+  },
+  {
+    text: 'Τι τύπο σκάφους προτιμάς;',
+    hint: 'Το καταμαράν είναι πιο σταθερό, το μονόγαστο πιο ναυτικό.',
+    multi: false,
+    options: [
+      { e:'⛵', t:'Μονόγαστο', s:'Κλασικό ιστιοπλοϊκό — αυθεντική εμπειρία', v:'monohull' },
+      { e:'🚢', t:'Καταμαράν', s:'Πιο χώρος, πιο σταθερό, πιο άνετο', v:'catamaran' },
+      { e:'🤷', t:'Δεν ξέρω ακόμα', s:'Ανοιχτός/ή σε προτάσεις', v:'any_boat' },
+    ]
+  },
+  {
+    text: 'Πόσα άτομα θα είστε;',
+    hint: 'Μετράμε και τον εαυτό σου.',
+    multi: false,
+    grid: true,
+    options: [
+      { e:'👫', t:'2–4 άτομα', s:'2 καμπίνες', v:'2cab' },
+      { e:'👨‍👩‍👧‍👦', t:'4–6 άτομα', s:'3 καμπίνες', v:'3cab' },
+      { e:'🎉', t:'6–8 άτομα', s:'4 καμπίνες', v:'4cab' },
+      { e:'🥳', t:'8–10 άτομα', s:'5 καμπίνες', v:'5cab' },
+    ]
+  },
+  {
+    text: 'Πόσες μέρες έχεις;',
+    hint: 'Τα περισσότερα γιοτ νοικιάζονται Σάββατο–Σάββατο.',
+    multi: false,
+    grid: true,
+    options: [
+      { e:'⚡', t:'3–5 μέρες', s:'Γρήγορη απόδραση', v:'short' },
+      { e:'🗓️', t:'7 μέρες', s:'Κλασική εβδομάδα', v:'week' },
+      { e:'🌍', t:'10–14 μέρες', s:'Χαλαρό ταξίδι', v:'long' },
+      { e:'🔓', t:'Flexible', s:'Δεν έχω αποφασίσει', v:'flex' },
+    ]
+  },
+  {
+    text: 'Ποιο budget έχεις για το σκάφος;',
+    hint: 'Συνολικό κόστος για όλη την παρέα.',
+    multi: false,
+    options: [
+      { e:'💚', t:'Έως €2.500', s:'Οικονομική επιλογή', v:'budget1' },
+      { e:'💙', t:'€2.500 – €5.000', s:'Καλή αξία', v:'budget2' },
+      { e:'💛', t:'€5.000 – €8.000', s:'Άνεση & ποιότητα', v:'budget3' },
+      { e:'🧡', t:'€8.000 – €10.000', s:'Premium εμπειρία', v:'budget4' },
+      { e:'💎', t:'€10.000+', s:'Μόνο το καλύτερο', v:'budget5' },
+    ]
+  },
+  {
+    text: 'Τι είναι πιο σημαντικό;',
+    hint: 'Νέο σκάφος ή καλύτερη τιμή;',
+    multi: false,
+    grid: true,
+    options: [
+      { e:'✨', t:'Νέο σκάφος', s:'2020–2024', v:'new' },
+      { e:'⚖️', t:'Ισορροπία', s:'2016–2019', v:'mid_age' },
+      { e:'💰', t:'Καλή τιμή', s:'2015 και πριν', v:'old' },
+      { e:'🤷', t:'Δεν με νοιάζει', s:'Ό,τι βγει', v:'any_age' },
+    ]
+  },
+  {
+    text: 'Πότε σκέφτεσαι να ταξιδέψεις;',
+    hint: 'Η εποχικότητα επηρεάζει τις τιμές.',
+    multi: false,
+    grid: true,
+    options: [
+      { e:'🌸', t:'Άνοιξη', s:'Απρίλιος–Μάιος', v:'spring' },
+      { e:'☀️', t:'Καλοκαίρι', s:'Ιούνιος–Αύγουστος', v:'summer' },
+      { e:'🍂', t:'Φθινόπωρο', s:'Σεπτέμβριος–Οκτώβριος', v:'autumn' },
+      { e:'🗓️', t:'Δεν ξέρω ακόμα', s:'Ανοιχτό', v:'any_season' },
+    ]
+  }
+];
+
+const profiles = [
+  {
+    id: 'explorer',
+    icon: '🌊',
+    title: 'Ο Εξερευνητής',
+    sub: 'Κάθε λιμάνι είναι μια νέα περιπέτεια',
+    desc: 'Ζεις για τις ανακαλύψεις. Θέλεις να αράξεις σε άγνωστες παραλίες, να εξερευνάς μικρά χωριά και να βιώνεις αυθεντικές εμπειρίες. Το καταμαράν σου δίνει την ελευθερία και τον χώρο που χρειάζεσαι.',
+    details: [
+      { l:'Τύπος σκάφους', v:'Καταμαράν' },
+      { l:'Προτεινόμενος προορισμός', v:'Κυκλάδες ή Κροατία' },
+      { l:'Ιδανική διάρκεια', v:'7–10 μέρες' },
+      { l:'Ατμόσφαιρα', v:'Περιπέτεια & Ανακάλυψη' },
+    ],
+    match: a => (a.dest === 'greece' || a.dest === 'croatia') && (a.boat === 'catamaran' || a.boat === 'any_boat')
+  },
+  {
+    id: 'romantic',
+    icon: '🌅',
+    title: 'Ο Ρομαντικός',
+    sub: 'Ηλιοβασιλέματα, ησυχία και δυο καλύτερα',
+    desc: 'Ψάχνεις μαγευτικές στιγμές για δυο. Ένα κομψό μονόγαστο, ήσυχες παραλίες στην Ιταλία ή τη Λευκάδα, καλό κρασί στο κατάστρωμα. Η απόλυτη ρομαντική απόδραση.',
+    details: [
+      { l:'Τύπος σκάφους', v:'Μονόγαστο' },
+      { l:'Προτεινόμενος προορισμός', v:'Ιταλία ή Λευκάδα' },
+      { l:'Ιδανική διάρκεια', v:'7 μέρες' },
+      { l:'Ατμόσφαιρα', v:'Ρομαντισμός & Ησυχία' },
+    ],
+    match: a => (a.people === '2cab') && (a.dest === 'italy' || a.dest === 'greece')
+  },
+  {
+    id: 'party',
+    icon: '🎉',
+    title: 'Ο Party Traveler',
+    sub: 'Μεγάλη παρέα, μεγάλες αναμνήσεις',
+    desc: 'Για σένα το ταξίδι είναι η παρέα! Θέλεις ένα μεγάλο καταμαράν με χώρο για όλους, μουσική στο κατάστρωμα, και νυχτερινές βουτιές στη θάλασσα. Κροατία ή Ισπανία είναι η τέλεια επιλογή.',
+    details: [
+      { l:'Τύπος σκάφους', v:'Μεγάλο Καταμαράν' },
+      { l:'Προτεινόμενος προορισμός', v:'Κροατία ή Ισπανία' },
+      { l:'Ιδανική διάρκεια', v:'7 μέρες' },
+      { l:'Ατμόσφαιρα', v:'Fun & Παρέα' },
+    ],
+    match: a => (a.people === '4cab' || a.people === '5cab') && (a.dest === 'croatia' || a.dest === 'spain')
+  },
+  {
+    id: 'luxury',
+    icon: '💎',
+    title: 'Ο Luxury Seeker',
+    sub: 'Μόνο η καλύτερη εμπειρία',
+    desc: 'Δεν κάνεις συμβιβασμούς. Θέλεις το νεότερο σκάφος, τις καλύτερες εγκαταστάσεις, και τους πιο εντυπωσιακούς προορισμούς. Ισπανία, Ιταλία ή Καραϊβική με premium καταμαράν είναι ο κόσμος σου.',
+    details: [
+      { l:'Τύπος σκάφους', v:'Premium Καταμαράν 2020+' },
+      { l:'Προτεινόμενος προορισμός', v:'Ισπανία ή Καραϊβική' },
+      { l:'Budget', v:'€8.000+' },
+      { l:'Ατμόσφαιρα', v:'Πολυτέλεια & Στιλ' },
+    ],
+    match: a => (a.budget === 'budget4' || a.budget === 'budget5') && (a.age === 'new')
+  },
+  {
+    id: 'peaceful',
+    icon: '🌿',
+    title: 'Η Ήρεμη Ψυχή',
+    sub: 'Ησυχία, φύση και αυθεντικότητα',
+    desc: 'Δεν ψάχνεις πλήθη και θόρυβο. Θέλεις ήσυχες ακτές, αυθεντικά ψαροχώρια, και ηλιοβασιλέματα χωρίς τουρίστες. Ένα κλασικό μονόγαστο στην Ταϊλάνδη ή τη Λευκάδα είναι ο παράδεισός σου.',
+    details: [
+      { l:'Τύπος σκάφους', v:'Μονόγαστο' },
+      { l:'Προτεινόμενος προορισμός', v:'Ταϊλάνδη ή Λευκάδα' },
+      { l:'Ιδανική διάρκεια', v:'10–14 μέρες' },
+      { l:'Ατμόσφαιρα', v:'Ηρεμία & Φύση' },
+    ],
+    match: a => (a.dest === 'thailand' || a.region === 'lefkada') && (a.boat === 'monohull' || a.boat === 'any_boat')
+  },
+  {
+    id: 'adventurous',
+    icon: '🗺️',
+    title: 'Ο Περιπετειώδης',
+    sub: 'Εξωτικοί προορισμοί, αξέχαστες εμπειρίες',
+    desc: 'Η Μεσόγειος δεν σε αρκεί — θέλεις να πας μακριά! Καραϊβική ή Ταϊλάνδη, εξωτικά νερά, πολιτισμοί που δεν έχεις γνωρίσει. Μεγάλο καταμαράν για ένα ταξίδι που θα θυμάσαι για πάντα.',
+    details: [
+      { l:'Τύπος σκάφους', v:'Καταμαράν' },
+      { l:'Προτεινόμενος προορισμός', v:'Καραϊβική ή Ταϊλάνδη' },
+      { l:'Ιδανική διάρκεια', v:'10–14 μέρες' },
+      { l:'Ατμόσφαιρα', v:'Περιπέτεια & Εξωτισμός' },
+    ],
+    match: a => (a.dest === 'caribbean' || a.dest === 'thailand')
+  }
+];
+
+let current = 0;
+let answers = {};
+let questionList = [];
+
+function buildQuestionList() {
+  questionList = questions.filter(q => {
+    if (q.onlyIf && answers.dest !== q.onlyIf) return false;
+    return true;
+  });
+}
+
+function startQuiz() {
+  document.getElementById('intro').style.display = 'none';
+  document.getElementById('progressWrap').style.display = 'block';
+  document.getElementById('quiz').style.display = 'block';
+  buildQuestionList();
+  showQuestion(0);
+}
+
+function showQuestion(idx) {
+  const q = questionList[idx];
+  document.getElementById('progressText').textContent = `Ερώτηση ${idx+1} από ${questionList.length}`;
+  document.getElementById('progressFill').style.width = `${(idx / questionList.length) * 100}%`;
+  document.getElementById('qText').textContent = q.text;
+  document.getElementById('qHint').textContent = q.hint;
+
+  const container = document.getElementById('opts');
+  container.className = 'options' + (q.grid ? ' grid-2' : '');
+  container.innerHTML = '';
+
+  q.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = `
+      <span class="opt-emoji">${opt.e}</span>
+      <span>
+        <span class="opt-text">${opt.t}</span>
+        ${opt.s ? `<div class="opt-sub">${opt.s}</div>` : ''}
+      </span>
+    `;
+    if (q.grid) {
+      btn.innerHTML = `
+        <span class="opt-emoji">${opt.e}</span>
+        <span class="opt-text">${opt.t}</span>
+        ${opt.s ? `<div class="opt-sub">${opt.s}</div>` : ''}
+      `;
+    }
+    btn.onclick = () => pick(q, opt.v, btn);
+    container.appendChild(btn);
+  });
+}
+
+function pick(q, value, btn) {
+  document.querySelectorAll('.opt').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+
+  // Store answer
+  if (q.onlyIf) { answers.region = value; }
+  else if (current === 0) { answers.dest = value; }
+  else if (!q.onlyIf && q === questionList[1] && !questionList[1].onlyIf) { answers.boat = value; }
+  else {
+    const keys = ['dest','boat','people','duration','budget','age','season'];
+    const keyIdx = questionList.indexOf(q);
+    answers[keys[keyIdx]] = value;
+  }
+
+  setTimeout(() => {
+    current++;
+    buildQuestionList();
+    if (current < questionList.length) {
+      showQuestion(current);
+    } else {
+      showResult();
+    }
+  }, 380);
+}
+
+function showResult() {
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('progressText').textContent = 'Αποτέλεσμα!';
+
+  // Find best match
+  let profile = profiles.find(p => p.match(answers)) || profiles[0];
+
+  const resultEl = document.getElementById('result');
+  resultEl.style.display = 'block';
+  resultEl.classList.add('fade-in');
+
+  // Update card top
+  document.getElementById('cardTitle').innerHTML = profile.title;
+  document.getElementById('cardSub').textContent = profile.sub;
+
+  resultEl.innerHTML = `
+    <div style="text-align:center; margin-bottom:20px;">
+      <span style="font-size:3.5rem; display:block; margin-bottom:10px; animation: float 3s ease-in-out infinite;">${profile.icon}</span>
+      <div style="display:inline-block; background:rgba(15,184,212,0.12); color:var(--teal); font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:5px 16px; border-radius:20px; border:1px solid rgba(15,184,212,0.25); margin-bottom:12px;">Το προφίλ σου</div>
+      <div style="font-family:'Italiana',serif; font-size:1.8rem; color:var(--dark); margin-bottom:4px;">${profile.title}</div>
+      <div style="font-size:0.85rem; color:var(--muted); font-style:italic;">${profile.sub}</div>
+    </div>
+
+    <div class="result-desc">${profile.desc}</div>
+
+    <div class="result-details">
+      ${profile.details.map(d => `
+        <div class="detail-box">
+          <div class="detail-label">${d.l}</div>
+          <div class="detail-value">${d.v}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <a href="${AFFILIATE}" target="_blank" class="cta-btn">⛵ Βρες το γιοτ σου στο SeaRadar →</a>
+    <button class="share-btn" onclick="shareResult()">📤 Μοιράσου το αποτέλεσμά σου</button>
+    <button class="restart-btn" onclick="restart()">↩ Ξανάπαιξε το quiz</button>
+    <div class="aff-note">* Affiliate link — αν κάνεις κράτηση, κερδίζω μια μικρή προμήθεια χωρίς επιπλέον κόστος για σένα.</div>
+  `;
+}
+
+function shareResult() {
+  if (navigator.share) {
+    navigator.share({ title: 'Βρήκα το ιδανικό γιοτ μου στο PassMatch!', url: window.location.href });
+  } else {
+    navigator.clipboard.writeText(window.location.href).then(() => alert('Ο σύνδεσμος αντιγράφηκε!'));
+  }
+}
+
+function restart() {
+  current = 0;
+  answers = {};
+  questionList = [];
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('result').innerHTML = '';
+  document.getElementById('cardTitle').innerHTML = 'Βρες το Ιδανικό<br>Γιοτ σου';
+  document.getElementById('cardSub').textContent = '8 ερωτήσεις · 6 διαφορετικά αποτελέσματα · Δωρεάν';
+  document.getElementById('quiz').style.display = 'block';
+  buildQuestionList();
+  showQuestion(0);
+}
+</script>
+</body>
+</html>
